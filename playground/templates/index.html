@@ -22,19 +22,19 @@
             <h1 class="text-2xl font-bold text-gray-700">{{question}}</h1>
         </div>
 
-        <div id="responseContainer" class="container flex bg-gray-100 h-screen">
+        <div id="responseContainer" class="container flex bg-gray-100 min-h-screen">
             <div id="chatgpt" class="w-1/2 border-r border-lg m-5">
-                <div class="flex w-full justify-center">
-                    <h1 class="text-2xl font-bold">ChatGPT</h1>
+                <div class="flex max-w-full justify-center">
+                    <h1 class="text-2xl font-bold">GPT</h1>
                 </div>
-                <p class="text-justify">{{ response|safe }}</p>
+                <p class="text-justify">{{ GPTresponse|safe }}</p>
             </div>
         
             <div id="bard" class="m-5 w-1/2">
-                <div class="flex w-full justify-center">
-                    <h1 class="text-2xl font-bold">bard</h1>
+                <div class="flex max-w-full justify-center">
+                    <h1 class="text-2xl font-bold">Gemini</h1>
                 </div>
-                <p class="text-justify">{{ response|safe }}</p>
+                <p class="text-justify">{{ geminiResponce|safe }}</p>
             </div>
         </div>
         

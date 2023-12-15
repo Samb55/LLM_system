@@ -1,11 +1,11 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import LLMForm
-from .llm_service import LLMService  # Import the LLMService class
+from .llm_service import GPTService,geminiService  # Import the LLMService class
 import markdown 
 
 def markdownify(text):
-    return markdown.markdown(text,extensions=["fenced_code"])
+    return markdown.markdown(text,extensions=['markdown.extensions.fenced_code'])
 
 
 # def index(request):
@@ -18,12 +18,14 @@ def llm_ser(request):
     if request.method == "POST":
         form = LLMForm(request.POST)
         if form.is_valid():
-            llm_service = LLMService()
+            llm_service = GPTService()
             text = form.cleaned_data["text"]
             response = llm_service.get_response(text)
-            response = markdownify(response)
-
-            context = {"question": text, "response": response, "form": form}
+            GPTresponse = markdownify(response)
+            geminiResponce = geminiService().get_response(text).text
+            geminiResponce = markdownify(geminiResponce)
+            context = {"question": text, "GPTresponse": GPTresponse,"geminiResponce":geminiResponce, "form": form}
+            
             return render(request, "index.html", context)
     else:
         context = {"form": form}
